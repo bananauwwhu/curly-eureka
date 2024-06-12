@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>缴费跳转</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .message {
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="message" id="message"></div>
+
+    <script>
+        // 获取URL中的参数
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.slice(1);
+            const pairs = queryString.split('&');
+            for (const pair of pairs) {
+                const [key, value] = pair.split('=');
+                if (key) {
+                    params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+                }
+            }
+            return params;
+        }
+
+        // 显示参数
+        window.onload = function() {
+            const params = getQueryParams();
+            const messageElement = document.getElementById('message');
+            if (params.message) {
+                messageElement.textContent = `传递的参数是：${params.message}`;
+            } else {
+                messageElement.textContent = '没有传递参数';
+            }
+        };
+    </script>
+</body>
+</html>
